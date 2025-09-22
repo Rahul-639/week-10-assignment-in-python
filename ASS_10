@@ -1,0 +1,25 @@
+def simpleTextEditor(ops):
+    s = []
+    history = []
+    res = []
+    for op in ops:
+        parts = op.split()
+        if parts[0] == "1":  # append
+            history.append(("1", parts[1]))
+            s.extend(parts[1])
+        elif parts[0] == "2":  # delete
+            k = int(parts[1])
+            deleted = s[-k:]
+            history.append(("2", "".join(deleted)))
+            s = s[:-k]
+        elif parts[0] == "3":  # print
+            k = int(parts[1])
+            res.append(s[k - 1])
+        else:  # undo
+            last = history.pop()
+            if last[0] == "1":
+                l = len(last[1])
+                s = s[:-l]
+            else:
+                s.extend(last[1])
+    return res
