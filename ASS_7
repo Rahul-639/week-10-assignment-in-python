@@ -1,0 +1,15 @@
+def minPlatforms(arr, dep):
+    arr.sort()
+    dep.sort()
+    i = j = 0
+    plat_needed = res = 0
+    while i < len(arr) and j < len(dep):
+        if arr[i] <= dep[j]:
+            plat_needed += 1
+            res = max(res, plat_needed)
+            i += 1
+        else:
+            plat_needed -= 1
+            j += 1
+    return res
+
