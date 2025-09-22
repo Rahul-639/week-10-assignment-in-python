@@ -1,0 +1,13 @@
+def jobSequencing(deadlines, profits):
+    jobs = sorted(zip(profits, deadlines), reverse=True)  # sort by profit
+    max_dead = max(deadlines)
+    slots = [-1] * (max_dead + 1)
+    count_jobs, max_profit = 0, 0
+    for profit, deadline in jobs:
+        for t in range(deadline, 0, -1):
+            if slots[t] == -1:
+                slots[t] = profit
+                count_jobs += 1
+                max_profit += profit
+                break
+    return [count_jobs, max_profit]
