@@ -1,0 +1,12 @@
+def sherlockAndAnagrams(s: str) -> int:
+    from collections import Counter
+    freq = Counter()
+    for i in range(len(s)):
+        count = [0] * 26
+        for j in range(i, len(s)):
+            count[ord(s[j]) - ord('a')] += 1
+            freq[tuple(count)] += 1
+    res = 0
+    for v in freq.values():
+        res += v * (v - 1) // 2
+    return res
